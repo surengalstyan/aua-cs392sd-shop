@@ -1,13 +1,13 @@
 
 # Public Demo 
 
-http://the-shop-ui.s3-website.eu-central-1.amazonaws.com/
+https://aua-cs392sd-shop-ui.onrender.com
 
 API
-https://aua-cs392sd-shop-api.onrender.com/
+https://aua-cs392sd-shop-api.onrender.com
 
 Source Code:
-https://github.com/surengalstyan
+https://github.com/surengalstyan/aua-cs392sd-shop
 
 
 # For local development
