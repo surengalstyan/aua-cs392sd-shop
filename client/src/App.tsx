@@ -28,7 +28,7 @@ function Product({ product }: any) {
       {opened && (
         <>
           {loading && <div>loading...</div>}
-          {(stock) && (
+          {stock && (
             <div className="checkout">
               <span>
                 <b>{order ? stock.count - 1 : stock.count}</b> items is
@@ -39,7 +39,8 @@ function Product({ product }: any) {
                 Price after dicount <b>${stock.price}</b>
               </span>
               <br></br>
-              {(!order && stock.count > 0) &&
+              {!order &&
+                stock.count > 0 &&
                 (ordering ? (
                   <span>Moment please</span>
                 ) : (
@@ -51,7 +52,7 @@ function Product({ product }: any) {
           )}
           {order && (
             <div>
-              <h4>Thanks You!</h4>
+              <h4>Thank You! Your order is successfully placed.</h4>
             </div>
           )}
         </>

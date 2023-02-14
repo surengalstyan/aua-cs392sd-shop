@@ -1,13 +1,11 @@
 
 # Public Demo 
 
-https://aua-cs392sd-shop-ui.onrender.com
+UI: https://aua-cs392sd-shop-ui.onrender.com
 
-API
-https://aua-cs392sd-shop-api.onrender.com
+API: https://aua-cs392sd-shop-api.onrender.com
 
-Source Code:
-https://github.com/surengalstyan/aua-cs392sd-shop
+Source Code: https://github.com/surengalstyan/aua-cs392sd-shop
 
 
 # For local development
