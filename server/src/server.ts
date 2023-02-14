@@ -12,7 +12,7 @@ app.get("/products", async (req, res) => {
   res.json(products);
 });
 
-app.get("/product/:id", async (req, res) => {
+app.get("/products/:id", async (req, res) => {
   const { id } = req.params;
 
   const product = await database.product.findFirst({
@@ -24,7 +24,7 @@ app.get("/product/:id", async (req, res) => {
   res.json(product);
 });
 
-app.get("/stock/:productId", async (req, res) => {
+app.get("/products/:productId/stock", async (req, res) => {
   const { productId } = req.params;
 
   const stock = await database.stock.findFirst({
@@ -36,7 +36,7 @@ app.get("/stock/:productId", async (req, res) => {
   res.json(stock);
 });
 
-app.post("/order/:productId", async (req, res) => {
+app.post("/products/:productId/order", async (req, res) => {
   const { productId } = req.params;
 
   const order = await database.$transaction(async (db) => {
