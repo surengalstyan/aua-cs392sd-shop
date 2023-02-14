@@ -13,7 +13,7 @@ const orderByProductId = async (productId: number) => {
       throw new Error(`product not in a stock: productId:${productId}`);
     }
 
-    db.order.create({
+    await db.order.create({
       data: {
         productId,
         stockId: stock?.id,
