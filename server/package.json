@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "NODE_PATH=src ts-node src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
+    "start": "NODE_PATH=dist node dist/server.js",
     "database:migrate": "npx prisma migrate dev",
     "database:seed": "npx prisma db seed"
   },
