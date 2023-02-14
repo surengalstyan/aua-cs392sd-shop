@@ -3,9 +3,16 @@
     "sourceMap": true,
     "outDir": "dist",
     "strict": true,
-    "lib": ["esnext"],
+    "lib": [
+      "esnext"
+    ],
     "esModuleInterop": true,
-    "baseUrl": "./src",
-    "rootDir": "./src"
-  }
+    "baseUrl": "src",
+  },
+  "include": [
+    "**/*.ts",
+  ],
+  "exclude": [
+    "node_modules"
+  ],
 }
