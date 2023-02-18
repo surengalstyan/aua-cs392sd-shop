@@ -1,3 +1,4 @@
+import { validateId } from "api/utils/validators";
 import { orderByProductId } from "app/order";
 import { getAllProducts, getProductById } from "app/product";
 import { getStockByProductId } from "app/stock";
@@ -10,16 +11,18 @@ router.get("/products", async (req, res) => {
   res.json(products);
 });
 
-router.get("/products/:id", async (req, res) => {
-  const { id } = req.params;
+router.get("/products/:productId", async (req, res) => {
+  const { productId } = req.params;
+  validateId(productId);
 
-  const product = await getProductById(Number(id));
+  const product = await getProductById(Number(productId));
 
   res.json(product);
 });
 
 router.get("/products/:productId/stock", async (req, res) => {
   const { productId } = req.params;
+  validateId(productId);
 
   const stock = await getStockByProductId(Number(productId));
 
@@ -28,6 +31,7 @@ router.get("/products/:productId/stock", async (req, res) => {
 
 router.post("/products/:productId/order", async (req, res) => {
   const productId = Number(req.params.productId);
+  validateId(productId);
 
   const stock = await getStockByProductId(productId);
   if (!stock) {

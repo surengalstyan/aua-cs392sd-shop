@@ -1,3 +1,4 @@
+import { validate, validateId } from "api/utils/validators";
 import { orderByProductId } from "app/order";
 import {
   getAllProducts,
@@ -13,39 +14,59 @@ const router = express.Router();
 // create
 router.post("/products", async (req, res) => {
   const payload = req.body;
-  try {
-    console.log(payload);
-    const products = await createProduct(payload);
-    res.json(products);
-  } catch (err) {
-    console.error(err);
-    res.sendStatus(500);
-  }
+  validate(payload, {
+    title: {
+      presence: true,
+      length: { minimum: 1, maximum: 256 },
+      type: "string",
+    },
+    description: {
+      presence: true,
+      length: { minimum: 1, maximum: 4096 },
+      type: "string",
+    },
+    image: {
+      presence: true,
+      length: { minimum: 1, maximum: 2048 },
+      type: "string",
+    },
+  });
+
+  const products = await createProduct(payload);
+  res.json(products);
 });
 
 // update
 router.put("/products/:productId", async (req, res) => {
   const { productId } = req.params;
   const payload = req.body;
-  try {
-    const products = await updateProduct(Number(productId), payload);
-    res.json(products);
-  } catch (err) {
-    console.error(err);
-    res.sendStatus(500);
-  }
+  validateId(productId);
+  validate(payload, {
+    title: {
+      length: { minimum: 1, maximum: 256 },
+      type: "string",
+    },
+    description: {
+      length: { minimum: 1, maximum: 4096 },
+      type: "string",
+    },
+    image: {
+      length: { minimum: 1, maximum: 2048 },
+      type: "string",
+    },
+  });
+
+  const products = await updateProduct(Number(productId), payload);
+  res.json(products);
 });
 
 // delete
 router.delete("/products/:productId", async (req, res) => {
   const { productId } = req.params;
-  try {
-    await deleteProduct(Number(productId));
-    res.sendStatus(200);
-  } catch (err) {
-    console.error(err);
-    res.sendStatus(500);
-  }
+  validateId(productId);
+
+  await deleteProduct(Number(productId));
+  res.sendStatus(200);
 });
 
 // get all
@@ -57,6 +78,8 @@ router.get("/products", async (req, res) => {
 // get by id
 router.get("/products/:productId", async (req, res) => {
   const { productId } = req.params;
+  validateId(productId);
+
   const product = await getProductById(Number(productId));
   res.json(product);
 });
@@ -64,6 +87,8 @@ router.get("/products/:productId", async (req, res) => {
 // get available stock
 router.get("/products/:productId/stock", async (req, res) => {
   const { productId } = req.params;
+  validateId(productId);
+
   const stock = await getStockByProductId(Number(productId));
   res.json(stock);
 });
@@ -71,6 +96,7 @@ router.get("/products/:productId/stock", async (req, res) => {
 // do order
 router.post("/products/:productId/order", async (req, res) => {
   const productId = Number(req.params.productId);
+  validateId(productId);
 
   const stock = await getStockByProductId(productId);
   if (!stock) {
