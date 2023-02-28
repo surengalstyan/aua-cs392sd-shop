@@ -1,7 +1,7 @@
-import { database } from "database";
+import { relationalDb } from "database/relational-db";
 
-const orderByProductId = async (productId: number) => {
-  const order = await database.$transaction(async (db) => {
+const orderByProductId = async (productId: string) => {
+  const order = await relationalDb.$transaction(async (db) => {
     const stock = await db.stock.findFirst({
       where: {
         productId,
@@ -16,7 +16,7 @@ const orderByProductId = async (productId: number) => {
     await db.order.create({
       data: {
         productId,
-        stockId: stock?.id,
+        stockId: stock.id,
         count: 1,
       },
     });

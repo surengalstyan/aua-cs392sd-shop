@@ -1,11 +1,11 @@
-import { database } from "database";
+import { documentDb } from "database/document-db";
 
 const getAllProducts = async () => {
-  return await database.product.findMany();
+  return await documentDb.product.findMany();
 };
 
-const getProductById = async (id: number) => {
-  return await database.product.findFirst({
+const getProductById = async (id: string) => {
+  return await documentDb.product.findFirst({
     where: {
       id,
     },
@@ -13,15 +13,15 @@ const getProductById = async (id: number) => {
 };
 
 const createProduct = async (product: any) => {
-  return await database.product.create({ data: product });
+  return await documentDb.product.create({ data: product });
 };
 
-const updateProduct = async (id: number, product: any) => {
-  return await database.product.update({ where: { id }, data: product });
+const updateProduct = async (id: string, product: any) => {
+  return await documentDb.product.update({ where: { id }, data: product });
 };
 
-const deleteProduct = async (id: number) => {
-  return await database.product.delete({ where: { id } });
+const deleteProduct = async (id: string) => {
+  return await documentDb.product.delete({ where: { id } });
 };
 
 export {

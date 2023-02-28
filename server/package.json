@@ -4,8 +4,12 @@
     "dev": "NODE_PATH=src ts-node src/server.ts",
     "build": "tsc",
     "start": "NODE_PATH=dist node dist/server.js",
-    "database:migrate": "npx prisma migrate dev",
-    "database:seed": "npx prisma db seed"
+    "database:seed": "npx prisma db seed --schema src/database/document-db/schema.prisma",
+    "database:migrate": "npx prisma migrate dev --schema src/database/relational-db/schema.prisma",
+    "database:generate:rdb": "prisma generate --schema src/database/relational-db/schema.prisma",
+    "database:generate:ddb": "prisma generate --schema src/database/document-db/schema.prisma",
+    "database:generate": "npm run database:generate:rdb && npm run database:generate:ddb",
+    "postinstall": "npm run database:generate"
   },
   "dependencies": {
     "@prisma/client": "4.9.0",
@@ -25,7 +29,6 @@
     "typescript": "4.9.5"
   },
   "prisma": {
-    "seed": "ts-node src/database/prisma/seed.ts",
-    "schema": "src/database/prisma/schema.prisma"
+    "seed": "ts-node src/database/document-db/seed.ts"
   }
 }

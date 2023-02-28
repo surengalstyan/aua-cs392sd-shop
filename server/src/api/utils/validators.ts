@@ -14,8 +14,8 @@ function validateId(input: any) {
     {
       id: {
         presence: true,
-        numericality: {
-          onlyInteger: true,
+        length: {
+          is: 24,
           strict: true,
         },
       },
@@ -23,4 +23,4 @@ function validateId(input: any) {
   );
 }
 
-export { validateId, validate };
+export { validate, validateId };

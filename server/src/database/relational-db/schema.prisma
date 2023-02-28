@@ -1,32 +1,20 @@
 generator client {
   provider      = "prisma-client-js"
+  output        = "./generated"
   binaryTargets = ["native", "rhel-openssl-1.0.x", "darwin"]
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
-model Product {
-  id          Int       @id @default(autoincrement())
-  title       String
-  description String?
-  image       String?
-  stocks      Stock[]
-  orders      Order[]
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  deletedAt   DateTime?
+  url      = env("POSTGRES_DATABASE_URL")
 }
 
 model Stock {
   id        Int       @id @default(autoincrement())
-  productId Int
+  productId String
   count     Int
   price     Decimal
   orders    Order[]
-  product   Product   @relation(fields: [productId], references: [id])
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
@@ -34,10 +22,9 @@ model Stock {
 
 model Order {
   id        Int       @id @default(autoincrement())
-  productId Int
+  productId String
   stockId   Int
   count     Int
-  product   Product   @relation(fields: [productId], references: [id])
   stock     Stock     @relation(fields: [stockId], references: [id])
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt

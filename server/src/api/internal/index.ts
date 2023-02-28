@@ -15,7 +15,7 @@ router.get("/products/:productId", async (req, res) => {
   const { productId } = req.params;
   validateId(productId);
 
-  const product = await getProductById(Number(productId));
+  const product = await getProductById(productId);
 
   res.json(product);
 });
@@ -24,13 +24,13 @@ router.get("/products/:productId/stock", async (req, res) => {
   const { productId } = req.params;
   validateId(productId);
 
-  const stock = await getStockByProductId(Number(productId));
+  const stock = await getStockByProductId(productId);
 
   res.json(stock);
 });
 
 router.post("/products/:productId/order", async (req, res) => {
-  const productId = Number(req.params.productId);
+  const productId = req.params.productId;
   validateId(productId);
 
   const stock = await getStockByProductId(productId);

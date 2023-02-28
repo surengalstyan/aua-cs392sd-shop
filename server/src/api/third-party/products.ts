@@ -56,7 +56,7 @@ router.put("/products/:productId", async (req, res) => {
     },
   });
 
-  const products = await updateProduct(Number(productId), payload);
+  const products = await updateProduct(productId, payload);
   res.json(products);
 });
 
@@ -65,7 +65,7 @@ router.delete("/products/:productId", async (req, res) => {
   const { productId } = req.params;
   validateId(productId);
 
-  await deleteProduct(Number(productId));
+  await deleteProduct(productId);
   res.sendStatus(200);
 });
 
@@ -80,7 +80,7 @@ router.get("/products/:productId", async (req, res) => {
   const { productId } = req.params;
   validateId(productId);
 
-  const product = await getProductById(Number(productId));
+  const product = await getProductById(productId);
   res.json(product);
 });
 
@@ -89,13 +89,13 @@ router.get("/products/:productId/stock", async (req, res) => {
   const { productId } = req.params;
   validateId(productId);
 
-  const stock = await getStockByProductId(Number(productId));
+  const stock = await getStockByProductId(productId);
   res.json(stock);
 });
 
 // do order
 router.post("/products/:productId/order", async (req, res) => {
-  const productId = Number(req.params.productId);
+  const productId = req.params.productId;
   validateId(productId);
 
   const stock = await getStockByProductId(productId);

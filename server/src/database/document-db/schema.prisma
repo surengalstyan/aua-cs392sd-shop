@@ -1,0 +1,20 @@
+generator client {
+  provider      = "prisma-client-js"
+  output        = "./generated"
+  binaryTargets = ["native", "rhel-openssl-1.0.x", "darwin"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGODB_DATABASE_URL")
+}
+
+model Product {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String?
+  image       String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+}

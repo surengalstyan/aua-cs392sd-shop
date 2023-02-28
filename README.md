@@ -14,13 +14,14 @@ Source Code: https://github.com/surengalstyan/aua-cs392sd-shop
 
 - Node.js 18.14.0 https://nodejs.org/en/
 - Postgres version 14/15 https://www.postgresql.org/download/
+- MongoDB version 5
 
 ## 2. Initialize database
 
 > **Note**
-> You can skip this step if are willing to connect to the demo database on AWS. (Normally sensitive env variables should not be submitted. Just to avoid setting up DB locally.)
+> You can skip this step if are willing to connect to the demo database on AWS and Atlas.
 
-> Otherwise, make sure you have `server/.env` file and `DATABASE_URL` env var is set.
+> Otherwise, make sure you have `server/.env` file and `POSTGRES_DATABASE_URL` & `MONGODB_DATABASE_URL` env var are set.
 
 ### Initialize schema
 

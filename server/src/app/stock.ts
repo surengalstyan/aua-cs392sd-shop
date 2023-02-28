@@ -1,9 +1,9 @@
-import { database } from "database";
+import { relationalDb } from "database/relational-db";
 
-const getStockByProductId = async (id: number) => {
-  return await database.stock.findFirst({
+const getStockByProductId = async (id: string) => {
+  return await relationalDb.stock.findFirst({
     where: {
-      productId: Number(id),
+      productId: id,
     },
   });
 };
