@@ -12,8 +12,6 @@
   },
   "include": [
     "**/*.ts",
-    "src/database/document-db/generated/**/*",
-    "src/database/ralational-db/generated/**/*",
   ],
   "exclude": [
     "node_modules"
